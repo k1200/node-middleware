@@ -1,0 +1,34 @@
+{
+	"name": "1200-middleware",
+	"version": "1.0.0",
+	"description": "1200 create node-middleware",
+	"main": "index.js",
+	"scripts": {
+		"dev": "node app.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/k1200/1200-middleware.git"
+	},
+	"keywords": [
+		"koa",
+		"node",
+		"middleware"
+	],
+	"author": "1200 1053182739@qq.com",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/k1200/1200-middleware/issues"
+	},
+	"homepage": "https://github.com/k1200/1200-middleware#readme",
+	"dependencies": {
+		"kcors": "^2.2.2",
+		"koa": "^2.11.0",
+		"koa-bodyparser": "^4.3.0",
+		"koa-compress": "^4.0.1",
+		"koa-logger": "^3.2.1",
+		"koa-router": "^8.0.8",
+		"koa-static": "^5.0.0"
+	}
+}
