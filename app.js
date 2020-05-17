@@ -1,8 +1,8 @@
 const Koa = require('koa')
 const app = new Koa()
 
-app.use(async (ctx) => {
-	ctx.body = 'Wise Wrong'
-})
+// const index = require('./routes/index')
+const compose = require('./routes/middleware/compose')
+app.use(compose)
 
 app.listen(3000)
