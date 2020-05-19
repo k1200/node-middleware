@@ -1,6 +1,5 @@
-const middleware = (req, res, next) => {
-    // TODO
-    console.log(req.query)
-    next()
-  }
-  module.exports = middleware
+const middleware = (ctx, next) => {
+	// TODO
+	next()
+}
+module.exports = middleware
