@@ -1,4 +1,5 @@
 const axios = require('axios')
+const logs = require('../logs')
 // //HTTPrequest拦截
 // axios.interceptors.request.use(
 // 	(config) => {
@@ -11,7 +12,6 @@ const axios = require('axios')
 // //HTTPresponse拦截
 axios.interceptors.response.use(
 	(res) => {
-		console.log(res)
 		const status = +res.data.code || 200
 		const message = res.data.msg || '未知错误'
 		//如果是401则跳转到登录页面
@@ -20,7 +20,7 @@ axios.interceptors.response.use(
 		// 如果请求为非200否者默认统一处理
 		if (status !== 200) {
 		}
-		return res
+		return res.data
 	},
 	(error) => {
 		// 写入错误日志 调用错误中间件
@@ -31,12 +31,14 @@ axios.interceptors.response.use(
 				data: error.response.data,
 				type: 'servers',
 			}
+			// logs('servers', errorRes, error.request, '')
 		} else {
 			errorRes = {
 				code: 400,
 				data: error,
 				type: 'node',
 			}
+			// logs('servers', error, '', '')
 		}
 		return errorRes
 	}
@@ -55,7 +57,7 @@ const middleware = async (ctx, next) => {
 			headers: {
 				authorization: header['authorization'] || '',
 				version: header['version'] || '',
-				'Tenant-Code': header['Tenant-Code'] || '',
+				'Tenant-Code': header['Tenant-Code'] || '000000',
 				'Blade-Auth': header['Blade-Auth'] || '',
 			},
 		})
