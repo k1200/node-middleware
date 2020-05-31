@@ -50,7 +50,7 @@ const middleware = async (ctx, next) => {
 		.request({
 			url,
 			method,
-			baseURL: `http://192.168.1.222`,
+			baseURL: `https://jixgapi.jixugou.cn`,
 			params: query,
 			data: ctx.request.body,
 			timeout: 60000,
