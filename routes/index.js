@@ -7,6 +7,9 @@ class KmlRouter {
 	constructor() {}
 	async enter(ctx, next) {}
 	async out(ctx, next) {}
+	async get(ctx, next) {}
+	async post(ctx, next) {}
+	async put(ctx, next) {}
 }
 
 module.exports = koaRouter
