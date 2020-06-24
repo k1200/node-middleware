@@ -1,8 +1,9 @@
 {
 	"verbose": false,
 	"debug": true,
+	"watch": ["webapp", "server", "until", "app.ts"],
 	"exec": "ts-node ./app.ts",
-	"ignore": ["node_modules", "./logs.log"],
+	"ignore": ["node_modules", "./logs.log", "*.md"],
 	"events": {
 		"restart": ""
 	},
