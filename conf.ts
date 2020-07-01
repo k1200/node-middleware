@@ -1,5 +1,5 @@
 const path = require('path')
-import { isObject } from './until/util'
+const { isObject } = require(`${process.cwd()}/until/util`)
 interface params {
 	[x: string]: any
 }
@@ -10,7 +10,7 @@ export const initConf: (params: params, name?: string) => void = async (
 	name
 ) => {
 	params && setConf(params, name)
-	const module = `./webapp/${conf.argv.webapp}/conf`
+	const module = `${process.cwd()}/webapp/${conf.env.argv.webapp}/conf`
 	setConf({ ...getConf('env'), mode: process.env.NODE_ENV }, 'env')
 	try {
 		const AppConf = await require(module)

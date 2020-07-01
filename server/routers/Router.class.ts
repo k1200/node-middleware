@@ -1,22 +1,43 @@
 const router = require('koa-router')()
-import { getConf } from './../../conf'
-
 const handleRouter = (conf: any) => {
 	const r = router[conf.methond]
 	r(conf['url'], async (ctx: any, next: Function) => {})
 }
 class KmlRouter {
+	id: string
+	app: any
+	ctx: any
+	req: any
+	res: any
 	enter: Function
 	out: Function
-	conf: object = getConf()
-	constructor(conf: Function, enter: Function, out: Function) {
-		this.conf = conf
+	appConf: object
+	constructor(ctx: any, next: any, appConf: any, api: any) {
+		this.id = api.id
+		this.ctx = ctx
+		this.req = ctx.req
+		this.res = ctx.res
+		this.appConf = appConf
 		this.enter = function () {
 			// this._enter().
 		}
-		this.out = out
+		this.out = function () {}
 	}
-	private async _enter(app: any, ctx: any, next: Function) {
+	emit() {
+		this.ctx.type = 'application/json'
+		this.ctx.body = JSON.stringify({
+			...this.appConf,
+			path: this.ctx.path,
+			href: this.ctx.href,
+			url: this.ctx.url,
+			originalUrl: this.ctx.originalUrl,
+			origin: this.ctx.origin,
+			querystring: this.ctx.querystring,
+			search: this.ctx.search,
+			query: this.ctx.query,
+		})
+	}
+	private async _enter(ctx: any, next: Function) {
 		return app
 	}
 	private async _out(ctx: any, next: Function) {}
