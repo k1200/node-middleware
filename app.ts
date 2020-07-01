@@ -21,7 +21,7 @@ app.use(bodyParser())
 // 	ctx.body = JSON.stringify(getConf())
 // })
 app.use(ENTER)
-
+console.log(1200, 35464)
 // app.listen(3000)
 http.createServer(app.callback()).listen(1200)
 https.createServer(app.callback()).listen(1201)
