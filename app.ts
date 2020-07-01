@@ -20,9 +20,6 @@ app.use(bodyParser())
 // 	ctx.req.type = 'application/json'
 // 	ctx.body = JSON.stringify(getConf())
 // })
-function a() {
-	let [a, b] = [1, 2]
-}
 app.use(ENTER)
 // app.listen(3000)
 http.createServer(app.callback()).listen(1200)

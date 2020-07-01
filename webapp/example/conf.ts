@@ -5,6 +5,5 @@ interface Conf {
 }
 const Conf: Conf = {
 	whitelist: '*', // 域名白名单
-	'max-age': 1200,
 }
 exports = module.exports = Conf
