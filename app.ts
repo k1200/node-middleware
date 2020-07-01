@@ -20,6 +20,7 @@ app.use(bodyParser())
 // 	ctx.req.type = 'application/json'
 // 	ctx.body = JSON.stringify(getConf())
 // })
+console.log('dev02')
 app.use(ENTER)
 
 // app.listen(3000)
