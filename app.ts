@@ -21,8 +21,7 @@ app.use(bodyParser())
 // 	ctx.body = JSON.stringify(getConf())
 // })
 function a() {
-	let a = 1
-	let b = 2
+	let [a, b] = [1, 2]
 }
 app.use(ENTER)
 // app.listen(3000)
