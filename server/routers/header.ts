@@ -1,10 +1,14 @@
-const middleware = async (ctx, next, conf = {}) => {
-	if (ctx.method === 'OPTIONS') {
-		ctx.status = 204
-		ctx.body = ''
-		return false
-	}
-	const [req, res] = [ctx.req, ctx.res]
+interface Conf {
+	'max-age'?: number
+	'allow-headers'?: string[]
+}
+const middleware: (ctx: any, next: Function) => any = (ctx, next) => {
+	// if (ctx.method === 'OPTIONS') {
+	// 	ctx.status = 204
+	// 	ctx.body = {}
+	// 	return false
+	// }
+	const conf = ctx.$conf
 	/**
 	 * 关键点：
 	 * 1、如果需要支持 cookies,
@@ -38,7 +42,6 @@ const middleware = async (ctx, next, conf = {}) => {
 		ctx.set('Access-Control-Max-Age', MaxAge)
 		ctx.set('Access-Control-Allow-Credentials', 'true')
 	}
-
-	await next()
+	next()
 }
 module.exports = middleware

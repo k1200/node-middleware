@@ -1,9 +1,3 @@
-interface HttpConf {
-	methods?: string
-	timeout?: number
-	path: string
-	header?: string[]
-}
 interface Enter {
 	(req: any, res: any, next: Function): any
 }
@@ -19,30 +13,30 @@ interface Params {
 }
 interface Login {
 	id: string
-	httpConf: HttpConf
+	methods?: string
+	timeout?: number
+	path: string
+	'allow-headers'?: string[]
 	params: Params
 	enter: Enter
 	outer: Outer
 }
-let params:Params
-const Login = () => {
-	let conf:Login = {
+const Login: (params: Params) => any = (params) => {
+	let conf: Login = {
 		id: 'kml-auth_login',
-		httpConf: {
-			path: `/${__dirname}/oauth/token/${__filename}`
-		},
+		path: `/${__dirname}/oauth/token/${__filename}`,
 		params,
-		enter (req, res, next) {
-			console.log("kml-auth_login")
+		enter() {
+			console.log('kml-auth_login')
 		},
-		outer (req, res, next) {
-			res.body = {
+		outer() {
+			this.res.body = {
 				code: 200,
-				message: "success",
-				data: ""
+				message: 'success',
+				data: '',
 			}
 			return false
-		}
+		},
 	}
 	return conf
 }

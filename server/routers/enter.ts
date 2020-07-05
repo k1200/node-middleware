@@ -18,7 +18,10 @@ const enter: (ctx: any, next: any) => any = (ctx, next) => {
 		}
 		return false
 	}
-	let currentApiCtx = new RouterClass(ctx, next, appConf, currentApi())
-	currentApiCtx.emit()
+	ctx['$conf'] = {
+		...appConf,
+		...currentApi(ctx.query, ctx.req.body),
+	}
+	next()
 }
 exports = module.exports = enter
