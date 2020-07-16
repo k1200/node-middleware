@@ -7,25 +7,17 @@ const { initConf } = require(`${process.cwd()}/conf`)
 const { parseParams } = require(`${process.cwd()}/until/util`)
 const ENTER = require(`${process.cwd()}/server/routers/enter`)
 const HEADER = require(`${process.cwd()}/server/routers/header`)
+let argv:any = process.argv.slice(2)
+argv = parseParams(argv)
 let app = new Koa()
+const {webapp} = argv
+const ROUTES = require(`${process.cwd()}/webapp/${webapp}/routes/index`)
 app.use(bodyParser())
-const argv = process.argv.slice(2)
-initConf(app, { argv: parseParams(argv) }, 'env')
+initConf(app, { argv }, 'env')
+
 app.use(ENTER)
 app.use(HEADER)
+app.use(ROUTES.routes(),  ROUTES.allowedMethods())
 
-app.use(async (ctx) => {
-	ctx.type = 'application/json'
-	ctx.body = JSON.stringify({
-		path: ctx.path,
-		href: ctx.href,
-		url: ctx.url,
-		originalUrl: ctx.originalUrl,
-		origin: ctx.origin,
-		querystring: ctx.querystring,
-		search: ctx.search,
-		query: ctx.query,
-	})
-})
 http.createServer(app.callback()).listen(1200)
 https.createServer(app.callback()).listen(1201)

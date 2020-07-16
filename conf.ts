@@ -38,3 +38,4 @@ export const setConf: (params: Params, name?: string) => Params = (
 export const getConf: (name?: string) => any = (name) => {
 	return name ? conf[name] : conf
 }
+export default conf
