@@ -36,4 +36,4 @@ AXIOS.interceptors.response.use(
     }
 );
 
-export default AXIOS
+exports = module.exports = AXIOS

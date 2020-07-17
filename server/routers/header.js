@@ -1,8 +1,4 @@
-interface Conf {
-	'max-age'?: number
-	'allow-headers'?: string[]
-}
-const middleware: (ctx: any, next: Function) => any = (ctx, next) => {
+const middleware = (ctx, next) => {
 	// if (ctx.method === 'OPTIONS') {
 	// 	ctx.status = 204
 	// 	ctx.body = {}
@@ -20,9 +16,9 @@ const middleware: (ctx: any, next: Function) => any = (ctx, next) => {
 	 * 4、通过 Access-Control-Allow-Headers 设置需要支持的跨域请求头
 	 * 5、通过 Access-Control-Allow-Methods 设置需要支持的跨域请求方法
 	 */
-	const MaxAge: number = conf['max-age'] || 86400
-	const AllowOrigin: string = conf['whitelist'] || '*'
-	let AllowHeaders: string[] = [
+	const MaxAge = conf['max-age'] || 86400
+	const AllowOrigin = conf['whitelist'] || '*'
+	let AllowHeaders = [
 		'X-Requested-With',
 		'User-Agent',
 		'Referer',
@@ -44,4 +40,4 @@ const middleware: (ctx: any, next: Function) => any = (ctx, next) => {
 	}
 	next()
 }
-module.exports = middleware
+exports = module.exports = middleware

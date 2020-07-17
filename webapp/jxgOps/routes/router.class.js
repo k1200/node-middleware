@@ -2,19 +2,26 @@ const ROUTER = require("koa-router")();
 const Axios = require("./axios")
 const Conf = require(`${process.cwd()}/conf`);
 
-export default class KmlRouter {
-  id: string;
-  conf: any;
-  enter: any;
-  outer: any;
-  router: any = ROUTER;
-  constructor(id: string) {
+const request = Symbol('request');
+const parserRouter = Symbol('parser_router');
+const setHeader = Symbol('set_header');
+const enter = Symbol('enter');
+const outer = Symbol('outer');
+
+class KmlRouter {
+  constructor(id) {
     this.id = id;
     this.conf = this.conf && this.conf.bind(this);
     this.enter = this.enter && this.enter.bind(this);
     this.outer = this.outer && this.outer.bind(this);
+    this.router = ROUTER
+    this[enter]()
+    return this
   }
-  private async _request() {
+  trigger() {
+    this[enter]()
+  }
+  async [request]() {
     const Conf = require(`${process.cwd()}/conf`);
     const {
       method = "get",
@@ -26,16 +33,17 @@ export default class KmlRouter {
 
     } = this.conf;
   }
-  private async _parserRouter() {
+  async [parserRouter]() {
     const conf = this.conf;
     const method = conf["method"] || "get";
     const r = this.router[method];
     const { ctx } = await r(
-      conf["url"],
-      async (ctx: any, next: Function) => ({ ctx, next })
+      conf["url"] || '/',
+      (ctx, next) => ({ ctx, next })
     );
+    ctx.body = `${method}-${this.id}`
   }
-  private async _enter() {
+  async [enter]() {
     // 1 跨域 请求头处理
     // this._setHeader()
     // 2 授权
@@ -43,8 +51,9 @@ export default class KmlRouter {
     // 3 参数处理
 
     //
-    this._outer();
+    this[parserRouter]();
   }
-  private _setHeader() {}
-  private async _outer() {}
+  [setHeader]() { }
+  async [outer]() { }
 }
+exports = module.exports = KmlRouter
