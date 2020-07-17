@@ -1,5 +1,7 @@
 const ROUTER = require("koa-router")();
-const Axios = require("./axios")
+const Axios = require("./axios");
+const { resolve } = require("path");
+const { rejects } = require("assert");
 const Conf = require(`${process.cwd()}/conf`);
 
 const request = Symbol('request');
@@ -18,14 +20,11 @@ class KmlRouter {
     this[enter]()
     return this
   }
-  trigger() {
-    this[enter]()
-  }
   async [request]() {
     const Conf = require(`${process.cwd()}/conf`);
     const {
       method = "get",
-      url = Conf.url,
+      url = Conf.url || this.conf || this.id,
       port = Conf.port || "80",
       timeout = Conf.timeout || 60000,
       header = Conf.header || null,
@@ -36,19 +35,18 @@ class KmlRouter {
   async [parserRouter]() {
     const conf = this.conf;
     const method = conf["method"] || "get";
-    const r = this.router[method];
-    const { ctx } = await r(
-      conf["url"] || '/',
-      (ctx, next) => ({ ctx, next })
-    );
-    ctx.body = `${method}-${this.id}`
+    this.router[method](this.conf.url || this.id, (ctx, next) => {
+      // 其他操作
+      // 1 跨域 请求头处理
+      // this._setHeader()
+      // 2 授权
+      /** **/
+      // 3 参数处理
+      this.enter(ctx, next)
+    });
   }
   async [enter]() {
-    // 1 跨域 请求头处理
-    // this._setHeader()
-    // 2 授权
-    /** **/
-    // 3 参数处理
+
 
     //
     this[parserRouter]();

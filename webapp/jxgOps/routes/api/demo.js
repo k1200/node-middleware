@@ -28,17 +28,17 @@ const Axios = require("../router.class");
 // }
 exports = module.exports = [
   class _ extends RouterClass {
-    constructor() {
-      super(`${__filename}_demo`);
+    constructor(url) {
+      super(url);
     }
     conf() {
       let conf = {};
       return conf;
     }
-    enter() {
-      console.log("kml-auth_login");
+    enter(ctx, next) {
+      ctx.body = ctx.path
     }
-    outer() {
+    outer(ctx, next) {
       this.res.body = {
         code: 200,
         message: "success",
@@ -48,15 +48,15 @@ exports = module.exports = [
     }
   },
   class Child extends RouterClass {
-    constructor() {
-      super(`${__filename}_child`);
+    constructor(url) {
+      super(url);
     }
     conf() {
       let conf = {};
       return conf;
     }
-    enter() {
-      console.log("kml-auth_child");
+    enter(ctx, next) {
+      ctx.body = ctx.path
     }
     outer() {
       this.res.body = {
