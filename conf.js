@@ -31,9 +31,13 @@ const setConf = (
 const getConf = (name) => {
 	return name ? conf[name] : conf
 }
+const ErrorCode = {
+	PARAMS_ERROR: 4000
+}
 exports = module.exports = {
 	initConf,
 	setConf,
 	getConf,
-	conf
+	conf,
+	ErrorCode
 }

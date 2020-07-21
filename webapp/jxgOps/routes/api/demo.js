@@ -31,7 +31,7 @@ exports = module.exports = [
     constructor(url) {
       super(url);
     }
-    conf() {
+    conf(){
       let conf = {
         dataType: 0, // 返回的data的默认值（与前端数据结构保持一致） Number: 0, String: '', Boolean: true, Object: {}, Array: []
         query: [
@@ -63,7 +63,8 @@ exports = module.exports = [
       return conf;
     }
     enter(ctx, next) {
-      ctx.body = ctx['Access-Control-Allow-Headers']
+      // console.log(ctx.req)
+      ctx.body = ctx.path
     }
     outer(ctx, next) {
       this.res.body = {
