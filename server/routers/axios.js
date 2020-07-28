@@ -13,26 +13,26 @@ AXIOS.interceptors.request.use(
         return config;
     },
     error => {
-        return Promise.reject(error);
+        return Promise.reject({error});
     }
 );
 //HTTPresponse拦截
 AXIOS.interceptors.response.use(
     res => {
-        const status = +res.data.code || 200;
-        //如果是401则跳转到登录页面
-        if (status === 401) {
+        // const status = +res.data.code || 200;
+        // //如果是401则跳转到登录页面
+        // if (status === 401) {
             
-        }
-        // 如果请求为非200否者默认统一处理
-        if (status !== 200) {
+        // }
+        // // 如果请求为非200否者默认统一处理
+        // if (status !== 200) {
 
-            return Promise.reject(new Error());
-        }
-        return res;
+        //     return Promise.reject(new Error());
+        // }
+        return res.data;
     },
     error => {
-        return Promise.reject(new Error(error));
+        return Promise.reject({error});
     }
 );
 

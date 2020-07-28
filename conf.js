@@ -1,6 +1,8 @@
 const path = require('path')
 const { isObject } = require(`${process.cwd()}/until/util`)
-let conf = {}
+let conf = {
+	port: 80
+}
 // 初始化配置
 const initConf = async (app, params, name) => {
 	params && setConf(params, name)
@@ -38,6 +40,6 @@ exports = module.exports = {
 	initConf,
 	setConf,
 	getConf,
-	conf,
+	Conf:conf,
 	ErrorCode
 }

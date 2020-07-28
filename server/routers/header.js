@@ -1,9 +1,15 @@
-const middleware = (ctx, next) => {
-	// if (ctx.method === 'OPTIONS') {
-	// 	ctx.status = 204
-	// 	ctx.body = {}
-	// 	return false
-	// }
+/**
+* @file 全局请求头处理
+* @version 0.0.1
+* @author 1200 <1053182739@qq.com>
+* @date 2020-07-28 17:19:35
+*/
+const middleware = async (ctx, next) => {
+	if (ctx.method === 'OPTIONS') {
+		ctx.status = 204
+		ctx.body = ''
+		return false
+	}
 	const conf = ctx.$conf
 	/**
 	 * 关键点：
@@ -38,6 +44,6 @@ const middleware = (ctx, next) => {
 		ctx.set('Access-Control-Max-Age', MaxAge)
 		ctx.set('Access-Control-Allow-Credentials', 'true')
 	}
-	next()
+	await next()
 }
 exports = module.exports = middleware

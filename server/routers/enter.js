@@ -1,6 +1,6 @@
 const { getConf } = require(`${process.cwd()}/conf`)
 
-const enter = (ctx, next) => {
+const enter = async (ctx, next) => {
 	const appConf = getConf()
 	const appDir = `${process.cwd()}/webapp/${appConf.env.argv.webapp}/api`
 	const path = ctx.path
@@ -21,6 +21,6 @@ const enter = (ctx, next) => {
 		...appConf,
 		// ...currentApi(ctx.query, ctx.req.body),
 	}
-	next()
+	await next()
 }
 exports = module.exports = enter
