@@ -24,7 +24,7 @@
 	"homepage": "https://github.com/k1200/1200-middleware#readme",
 	"dependencies": {
 		"@types/node": "^14.0.5",
-		"axios": "^0.19.2",
+		"axios": "^0.21.1",
 		"kcors": "^2.2.2",
 		"koa": "^2.11.0",
 		"koa-bodyparser": "^4.3.0",
